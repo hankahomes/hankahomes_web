@@ -1,0 +1,80 @@
+.parallax {
+  position: relative;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: #000;
+}
+
+.self-intro-container {
+  display: flex;
+  padding: 50px;
+  justify-content: center;
+  background-color: #eee;
+}
+
+.self-intro-container-mobile {
+  display: flex;
+  padding: 25px;
+  justify-content: center;
+  background-color: #eee;
+}
+
+.intro {
+  background-color: hsla(0, 0%, 8%, .5);
+  color: #fff;
+  padding: 18px;
+  font-size: 20px;
+  letter-spacing: 3px;
+  border-radius: 10px;
+}
+
+.bg2-title {
+  background-color: transparent;
+  font-size: 25px;
+  color: #f7f7f7;
+  letter-spacing: 10px;
+}
+
+.footer-container {
+  color: #ddd;
+  background-color: #282E34;
+  text-align: center;
+  padding: 50px 80px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.intro-name {
+  font-size: 1.2em;
+}
+
+.intro-title {
+  font-size: 1em;
+  background-color: #ebebeb;
+  padding: 16px;
+  border-radius: 25px;
+}
+
+.reverse-card {
+  display: flex;
+  flex-direction: column-reverse;
+}

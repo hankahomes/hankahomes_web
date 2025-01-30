@@ -1,113 +1,219 @@
+"use client";
+
+import { Avatar, Card, Col, Row } from 'antd';
 import Image from "next/image";
+import Header from "@components/Header";
+import CustomForm from "@/components/CustomForm";
+import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import "@styles/home.css";
+
+const { Meta } = Card;
 
 export default function Home() {
+  const isMobileView = useMediaQuery({
+    maxWidth: 650,
+  });
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileView);
+  }, [isMobileView]);
+
+  useEffect(() => {
+    const updateParallaxPosition = () => {
+      const backgrounds = document.querySelectorAll('.parallax');
+      backgrounds.forEach(bg => {
+        const rect = bg.getBoundingClientRect();
+        const yPos = (-rect.top / 4) + 20; // Adjust the parallax speed here
+        (bg as HTMLElement).style.backgroundPosition = `center ${yPos}px`;
+      });
+    };
+
+    const handleScroll = () => {
+      requestAnimationFrame(updateParallaxPosition);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  const renderMobile = () => {
+    return (
+      <div className="self-intro-container-mobile">
+        <Row gutter={[0, 30]}>
+          <Col span={24}>
+            <Card
+              hoverable
+            >
+              <Meta
+                avatar={<Image
+                  src="/intro1.jpg"
+                  alt="1"
+                  width={100}
+                  height={100}
+                />}
+                title={
+                  <div>
+                    <p>曹　亜蘭</p>
+                    <p>(石原　静和)</p>
+                  </div>
+                }
+                description={
+                  <div>
+                    <p>代表取締役 </p>
+                    <p>宅地建物取引士</p>
+                    <p>明治大学MBA</p>
+                    <p>ファイナンス・不動産專攻</p>
+                  </div>
+                }
+              />
+            </Card>
+          </Col>
+          <Col span={24}>
+            <Card
+              hoverable
+            >
+              <Meta
+                avatar={<Image
+                  src="/intro2.jpg"
+                  alt="1"
+                  width={100}
+                  height={100}
+                />}
+                title="中川　聖明"
+                description={
+                  <div>
+                    <p>執行役員、管理部長</p>
+                    <p>宅地建物取引士</p>
+                    <p>中小企業診断士</p>
+                    <p>特定社会保険労務士</p>
+                    <p>明治大学MBA</p>
+                    <p>マネジメント専攻</p>
+                  </div>
+                }
+              />
+            </Card>
+          </Col>
+        </Row>
+      </div>
+    )
+  }
+
+  const renderDesktop = () => {
+    return (
+      <div className="self-intro-container">
+        <Row gutter={120}>
+          <Col span={12}>
+            <Card
+              hoverable
+              style={{maxWidth: "380px"}}
+              cover={<Image
+                src="/intro1.jpg"
+                alt="1"
+                width={600}
+                height={800}
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />}
+            >
+              <Meta
+               title={
+                <div>
+                  <p>曹　亜蘭</p>
+                  <p>{"(石原　静和)"}</p>
+                </div>
+              } 
+              description={
+                <div>
+                  <p style={{ marginTop: "20px" }}>代表取締役 </p>
+                  <p>宅地建物取引士</p>
+                  <p>明治大学MBA</p>
+                  <p>ファイナンス・不動産專攻</p>
+                </div>
+              }
+              />
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Card
+              hoverable
+              style={{ maxWidth: "380px" }}
+              className="reverse-card"
+              cover={<Image
+                src="/intro2.jpg"
+                alt="1"
+                width={600}
+                height={800}
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />}
+            >
+              <Meta
+                title="中川　聖明"
+                description={
+                  <div>
+                    <p>執行役員、管理部長</p>
+                    <p>宅地建物取引士</p>
+                    <p>中小企業診断士</p>
+                    <p>特定社会保険労務士</p>
+                    <p>明治大学MBA</p>
+                    <p>マネジメント専攻</p>
+                  </div>
+                }
+              />
+            </Card>
+          </Col>
+        </Row>
+      </div>
+    )
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <Header />
+      <main>
+        <div className="parallax background1" style={{ backgroundImage: "url('/background1.webp')" }}>
+          <div className="overlay">
+            <div className="intro">
+              <h1>不動産の売買、仲介、賃貸、斡旋、管理</h1>
+              <p>及び不動産コンサルティング業</p>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
+        <div>
+          {isMobile ? renderMobile() : renderDesktop()}
+        </div>
+        <div className="parallax background2" style={{ backgroundImage: "url('/background2.webp')" }}>
+          <div className="overlay">
+            <span className="bg2-title">
+              {"HANKA HOME'S"}
             </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          </div>
+        </div>
+        <div className="footer-container">
+          <p>（公社）東京都宅地建物取引業会員</p>
+          <p>全日本不動産政治連盟</p>
+          <p>東京都知事（1）110629</p>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          <p style={{ marginTop: "25px" }}>住宅宿泊管理業者</p>
+          <p>国土交通大臣(01) F03616</p>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+          <p style={{ marginTop: "25px" }}>メインバンク</p>
+          <p>三菱UFJ銀行 新宿新都心支店</p>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <p style={{ marginTop: "25px" }}>顧問弁護士 : 金 浩俊</p>
+          <p>登録番号: 56412 登録年: 2016年</p>
+          <p>所属護士会: 第二東京</p>
+          <p>得意業務: 不動産取引一般、借地・借家、建築紛争·欠陥住宅、マンション法に関する紛争等</p>
+        </div>
+        <div className="footer-container form-container">
+          <CustomForm />
+        </div>
+      </main>
+    </>
   );
 }

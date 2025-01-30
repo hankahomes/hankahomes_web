@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: serif;
+  font: 400 15px/1.8 "Lato", sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.container-center {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
