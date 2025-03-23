@@ -197,9 +197,6 @@ export default function Home() {
           <p>全日本不動産政治連盟</p>
           <p>東京都知事（1）110629</p>
 
-          <p style={{ marginTop: "25px" }}>住宅宿泊管理業者</p>
-          <p>国土交通大臣(01) F03616</p>
-
           <p style={{ marginTop: "25px" }}>メインバンク</p>
           <p>三菱UFJ銀行 新宿新都心支店</p>
 
