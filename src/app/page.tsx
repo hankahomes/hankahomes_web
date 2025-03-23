@@ -89,12 +89,11 @@ export default function Home() {
                 title="中川　聖明"
                 description={
                   <div>
-                    <p>執行役員、管理部長</p>
+                    <p>副社長</p>
                     <p>宅地建物取引士</p>
                     <p>中小企業診断士</p>
                     <p>特定社会保険労務士</p>
-                    <p>明治大学MBA</p>
-                    <p>マネジメント専攻</p>
+                    <p>MBA（経営管理）</p>
                   </div>
                 }
               />
@@ -155,13 +154,12 @@ export default function Home() {
               <Meta
                 title="中川　聖明"
                 description={
-                  <div>
-                    <p>執行役員、管理部長</p>
+                  <div style={{marginTop: "22px"}}>
+                    <p>副社長</p>
                     <p>宅地建物取引士</p>
                     <p>中小企業診断士</p>
                     <p>特定社会保険労務士</p>
-                    <p>明治大学MBA</p>
-                    <p>マネジメント専攻</p>
+                    <p>MBA（経営管理）</p>
                   </div>
                 }
               />
